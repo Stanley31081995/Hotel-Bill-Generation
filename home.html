@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+
+{% block title %}Home{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div align="right">
+    <h2>Hi {{user.username}}!</h2>
+</div>
+
+
+<form action="bill" method="post">
+    {% csrf_token %}
+    <div align="center">
+        <h1>Enter the no of items:</h1>
+        <h3><p>NO_OF_VADA:<input type="text" name="no_of_vada"></p></h3>
+        <h3><p>NO_OF_IDLI:<input type="text" name="no_of_idli"></p></h3>
+        <h3><p>NO_OF_DOSA:<input type="text" name="no_of_dosa"></p></h3>
+        <input type="Submit">
+    </div>
+       
+    
+</form>
+<p><a href="{% url 'logout' %}">Log Out</a>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
+</body>
+</html>
